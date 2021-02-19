@@ -3,4 +3,10 @@
 body {
   background-color: antiquewhite;
   font-family: 'Open Sans', sans-serif;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.container {
+  margin-bottom: 2em;
 }
