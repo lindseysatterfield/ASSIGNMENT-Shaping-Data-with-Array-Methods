@@ -189,10 +189,32 @@ const manufacturing = () => {
   });
 };
 
+// Map
+const purchasingAgent = () => {
+  const outEl = document.querySelector('#purchasing-agents');
+  outEl.innerHTML += '<h1>Purchasing Agents</h1>';
+
+  const agents = businesses.map((business) => {
+    return {
+      fullName: `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast} `,
+      company: business.companyName,
+      phoneNumber: business.phoneWork,
+    };
+  });
+
+  agents.forEach((agent) => {
+    outEl.innerHTML += `<h2>${agent.fullName}</h2>`;
+    outEl.innerHTML += `<h2>${agent.company}`;
+    outEl.innerHTML += `<h2>${agent.phoneNumber}`;
+    outEl.innerHTML += '<hr/>';
+  });
+};
+
 const init = () => {
   activeBusinesses();
   businessInNy();
   manufacturing();
+  purchasingAgent();
 };
 
 init();
