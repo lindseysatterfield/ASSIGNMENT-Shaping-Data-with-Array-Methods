@@ -117,16 +117,26 @@ const activeBusinesses = () => {
   outEl.innerHTML = '<h1>Active Businesses</h1>';
 
   businesses.forEach((business) => {
+    // Reduce - calculates order method
+    let totalOrders = business.orders.reduce(
+      (currentTotal, nextValue) => (currentTotal += nextValue),
+      0
+    );
+
     outEl.innerHTML += `
-      <h2>${business.companyName}</h2>
-      <section>
-        ${business.addressFullStreet}
-      </section>
-      <section>
-        ${business.addressCity},
-        ${business['addressStateCode']}
-        ${business['addressZipCode']}
-      </section>`;
+        <h2>
+            ${business.companyName}
+            ($${Math.floor(totalOrders)})
+        </h2>
+        <section>
+            ${business.addressFullStreet}
+        </section>
+        <section>
+            ${business.addressCity},
+            ${business['addressStateCode']}
+            ${business['addressZipCode']}
+        </section>
+    `;
     outEl.innerHTML += '<hr/>';
   });
 };
@@ -230,7 +240,6 @@ const findCompanies = () => {
       const foundBusiness = businesses.find((business) =>
         business.companyName.includes(keyPressEvent.target.value)
       );
-      console.log(foundBusiness);
       const outEl = document.querySelector('#active-businesses');
       outEl.innerHTML = `
                 <h2>
