@@ -208,6 +208,45 @@ const purchasingAgent = () => {
     outEl.innerHTML += `<h2>${agent.phoneNumber}`;
     outEl.innerHTML += '<hr/>';
   });
+
+  // Find agents
+  document.querySelector('#agentSearch').addEventListener('keypress', (keyPressEvent) => {
+    if (keyPressEvent.charCode === 13) {
+      const foundBusiness = agents.find((business) =>
+        business.fullName.includes(keyPressEvent.target.value)
+      );
+      outEl.innerHTML += '<h1>Purchasing Agents</h1>';
+      outEl.innerHTML = `<h2>${foundBusiness.fullName}</h2>`;
+      outEl.innerHTML += `<h2>${foundBusiness.company}`;
+      outEl.innerHTML += `<h2>${foundBusiness.phoneNumber}`;
+    }
+  });
+};
+
+// Find companies
+const findCompanies = () => {
+  document.querySelector('#companySearch').addEventListener('keypress', (keyPressEvent) => {
+    if (keyPressEvent.charCode === 13) {
+      const foundBusiness = businesses.find((business) =>
+        business.companyName.includes(keyPressEvent.target.value)
+      );
+      console.log(foundBusiness);
+      const outEl = document.querySelector('#active-businesses');
+      outEl.innerHTML = `
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                <section>
+                ${foundBusiness.addressFullStreet}
+
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>`;
+    }
+  });
 };
 
 const init = () => {
@@ -215,6 +254,7 @@ const init = () => {
   businessInNy();
   manufacturing();
   purchasingAgent();
+  findCompanies();
 };
 
 init();
